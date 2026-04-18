@@ -170,11 +170,7 @@ export default function App() {
       content: (
         <div className="flex flex-col items-center justify-center text-center h-full max-w-5xl mx-auto px-6">
           <h2 className="text-8xl font-bold tracking-tighter mb-8 leading-tight">A CEO Operating System</h2>
-          <p className="text-3xl text-muted mb-16">Not a dashboard. A command center.</p>
-          <div className="bg-panel-elevated border border-line px-10 py-5 rounded-full flex items-center gap-4 text-blue-500 font-black text-2xl tracking-[0.2em]">
-            <Command size={28} />
-            APPLE-STYLE
-          </div>
+          <p className="text-3xl text-muted">Not a dashboard. A command center.</p>
         </div>
       )
     },
@@ -397,10 +393,29 @@ export default function App() {
       {/* HUD Elements */}
       <header className="absolute top-0 left-0 w-full p-8 flex justify-between items-center z-50">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white scale-90">
-            <Command size={16} strokeWidth={3} />
-          </div>
-          <span className="font-bold text-lg tracking-tight">Intelligence</span>
+          <img 
+            src="/visionx.png" 
+            alt="VisionX Logo" 
+            className="h-10 w-auto object-contain"
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              // Fallback to pixel-perfect CSS reproduction if image is missing
+              e.currentTarget.style.display = 'none';
+              const parent = e.currentTarget.parentElement;
+              if (parent && !parent.querySelector('.logo-fallback')) {
+                parent.insertAdjacentHTML('beforeend', `
+                  <div class="logo-fallback flex items-center gap-0.5 font-bold text-2xl tracking-tight text-white select-none">
+                    <span>VISI</span>
+                    <div class="relative flex items-center justify-center w-[22px] h-[22px] border-2 border-white rounded-full mx-0.5">
+                      <div class="w-1.5 h-1.5 rounded-full" style="background-color: #9D174D"></div>
+                    </div>
+                    <span class="relative -ml-0.5">N</span>
+                    <span style="color: #9D174D" class="ml-0.5">X</span>
+                  </div>
+                `);
+              }
+            }}
+          />
         </div>
         <div className="flex items-center gap-8 text-xs font-mono tracking-widest uppercase text-muted">
           <span className="flex items-center gap-2">
